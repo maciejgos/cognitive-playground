@@ -121,13 +121,17 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/redux/3.6.0/redux.min.js"></script>
 <!-- Main -->
 <script src="https://cdn.jsdelivr.net/npm/@microsoft/azsearch.js@0.0.21/dist/AzSearch.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dotenv@16.3.1"></script>
 <script>
-    require('dotenv').config();
+    // Initialize dotenv
+    dotenv.config();
+
+        
     // WARNING
     // For demonstration purposes only, do not use in a production environment. For simplicity, this is a single HTML page that has the query key to the search service.
     // CORS (*) must be enabled in the index before using the demo app.
 
-    // Initialize and connect to your search service
+    // Initialize and connect to your search service and Use your environment variable
     var queryKey = process.env.QUERY_KEY;
     var automagic = new AzSearch.Automagic({ index: "hotels-sample-index", queryKey: queryKey, service: "search-playground-svc", dnsSuffix:"search.windows.net" });
     
