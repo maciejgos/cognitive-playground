@@ -25,3 +25,37 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.modal {
+  position: fixed;
+  top: 15%;
+  left: 15%;
+  right: 15%;
+  bottom: 15%;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-content {
+  display: flex;
+  height: 100%;
+}
+
+.modal-main {
+  flex: 1;
+  padding: 20px;
+}
+
+.modal-sidebar {
+  width: 25%;
+  background-color: #f7fafc;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-sidebar button {
+  margin-bottom: 10px;
+}
