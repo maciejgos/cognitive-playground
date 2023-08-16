@@ -1,15 +1,6 @@
 {
   "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
   "configurations": {
-    "web": {
-      "appLocation": "web",
-      "apiLocation": "api",
-      "outputLocation": "out",
-      "appBuildCommand": "npm run build",
-      "apiBuildCommand": "npm run build",
-      "run": "npm run dev",
-      "appDevserverUrl": "http://localhost:3000"
-    },
     "cognitive-playground": {
       "appLocation": "web",
       "apiLocation": "api",
