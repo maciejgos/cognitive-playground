@@ -12,7 +12,7 @@ export function LeftSidebarComponent() {
           </button>
         </div>
         <div className="flex flex-col p-4">
-          <li>
+          {/* <li>
             <div id="CategoryFacet"></div>
           </li>
           <li>
@@ -47,7 +47,7 @@ export function LeftSidebarComponent() {
           </li>
           <li>
             <div id="Rooms/TagsFacet"></div>
-          </li>
+          </li> */}
         </div>
       </div>
     </div>
