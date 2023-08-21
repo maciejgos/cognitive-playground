@@ -1,36 +1,41 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
+import { AzureKeyCredential, SearchClient } from "@azure/search-documents";
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     context.log('HTTP trigger function processed a request.');
-    const results = [
-        {
-          hotel: "Hotel 1",
-          price: 100,
-        },
-        {
-          hotel: "Hotel 2",
-          price: 200,
-        },
-        {
-          hotel: "Hotel 3",
-          price: 300,
-        },
-        {
-          hotel: "Hotel 4",
-          price: 400,
-        },
-        {
-          hotel: "Hotel 5",
-          price: 500,
-        },
-        {
-          hotel: "Hotel 6",
-          price: 600,
-        }
-      ];
 
-    const name = (req.query.name || (req.body && req.body.name));
-    const responseMessage = results;
+    // Get Azure Cognitive Search API key from environment variable
+    const apiKey = process.env["AzureCognitiveSearchApiKey"];
+    const searchServiceName = process.env["AzureCognitiveSearchServiceName"];
+    const indexName = process.env["AzureCognitiveSearchIndexName"];
+
+    // Print all environment variables
+    // console.log("AzureCognitiveSearchApiKey: ", apiKey);
+    // console.log("AzureCognitiveSearchServiceName: ", searchServiceName);
+    // console.log("AzureCognitiveSearchIndexName: ", indexName);
+
+    // Get input text from query string
+    const inputText = (req.query.searchInput || (req.body && req.body.searchInput));
+    // console.log("inputText: ", inputText);
+
+    // Get * search results from Azure Cognitive Search
+    const searchClient = new SearchClient("https://" + searchServiceName + ".search.windows.net", indexName, new AzureKeyCredential(apiKey));
+    let output = [];
+
+    if(inputText) {
+        const searchResults = await searchClient.search(inputText);
+        for await (const result of searchResults.results) {
+            output.push(result.document);
+        }
+    } else {
+        const searchResults = await searchClient.search("*");
+        for await (const result of searchResults.results) {
+            output.push(result.document);
+        }
+    }
+
+    // const name = (req.query.name || (req.body && req.body.name));
+    const responseMessage = output || "No results found";
 
     context.res = {
         // status: 200, /* Defaults to 200 */
