@@ -5,3 +5,11 @@ GET http://localhost:7071/api/search
 ### Search API - invoke from Static Web Apps
 
 GET http://localhost:4280/api/search
+
+### Embeddings API - invoke from Azure Functions
+
+GET http://localhost:7071/api/embeddings
+
+### Embeddings API - invoke from Static Web Apps
+
+GET http://localhost:4280/api/embeddings
